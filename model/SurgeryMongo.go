@@ -1,6 +1,9 @@
 package model
 
-import "time"
+import (
+	"go.mongodb.org/mongo-driver/x/mongo/driver/uuid"
+	"time"
+)
 
 type SurgeryMongo struct {
 	ID            int64     `json:"id"`

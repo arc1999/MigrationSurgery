@@ -3,8 +3,11 @@ package dao
 import (
 	"MigrationSurgery/model"
 	"context"
-	"log"
-	"migrationSurgery/db"
+	"MigrationSurgery/db"
+	log "github.com/sirupsen/logrus"
+	gormbulk "github.com/t-tiger/gorm-bulk-insert"
+	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/mongo/options"
 	"os"
 )
 

@@ -1,6 +1,6 @@
 package main
 
-import "migrationSurgery/service"
+import "MigrationSurgery/service"
 
 var s service.SurgeryService
 

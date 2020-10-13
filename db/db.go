@@ -1,5 +1,17 @@
 package db
 
+import (
+	"MigrationSurgery/model"
+	"context"
+	"github.com/jinzhu/gorm"
+	"github.com/joho/godotenv"
+	log "github.com/sirupsen/logrus"
+	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/mongo/options"
+	"os"
+	"time"
+)
+
 var mysqldb *gorm.DB
 var mongodb *mongo.Database
 

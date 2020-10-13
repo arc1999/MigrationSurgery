@@ -1,6 +1,6 @@
 package transformer
 
-import "migrationSurgery/model"
+import "MigrationSurgery/model"
 
 func Transform(msurgeries []model.SurgeryMongo) []model.Surgery{
 	var surgeries []model.Surgery
