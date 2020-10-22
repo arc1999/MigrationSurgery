@@ -1,15 +1,15 @@
 package model
 
 import (
-	"go.mongodb.org/mongo-driver/x/mongo/driver/uuid"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	"time"
 )
 
 type SurgeryMongo struct {
-	ID            int64     `json:"id"`
+	ID            int64     `json:"_id" bson:"_id"`
 	DateCreated   time.Time `json:"dateCreated"`
 	DateUpdated   time.Time `json:"dateUpdated"`
-	Slug 		uuid.UUID	`json:"slug"`
+	Slug 		primitive.Binary	`json:"slug"`
 	CreatedBy     int64     `json:"createdBy"`
 	UpdatedBy     int64     `json:"updatedBy"`
 	Name          string    `json:"name"`

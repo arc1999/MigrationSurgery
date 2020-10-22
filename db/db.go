@@ -4,8 +4,10 @@ import (
 	"MigrationSurgery/model"
 	"context"
 	"github.com/jinzhu/gorm"
+	_ "github.com/jinzhu/gorm/dialects/mysql"
 	"github.com/joho/godotenv"
 	log "github.com/sirupsen/logrus"
+	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"os"
@@ -44,6 +46,7 @@ func init() {
 		log.Fatal(err)
 	}
 	mongodb = client.Database(os.Getenv("DATA_MONGODB_DATABASE"))
+	log.Println(mongodb.ListCollectionNames(context.TODO(),bson.D{}))
 	log.Println("MongoDb Connected")
 }
 

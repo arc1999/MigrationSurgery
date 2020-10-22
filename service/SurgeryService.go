@@ -23,18 +23,31 @@ func (is SurgeryService) Migrate() {
 	if err != nil {
 		log.Fatal(err)
 	}
-
+	log.Println(totaldoc)
 	var i int64
-	for i*nperpage < totaldoc {
-		msurgeries, err := d.Paginate(i, nperpage)
+	i=0
+	var noofpages = totaldoc/nperpage
+	log.Println(noofpages)
+	for i < noofpages {
+		msurgeries, err := d.Paginate(i*nperpage, nperpage)
 		if err != nil {
 			log.Fatal(err)
 		}
 		surgeries := transformer.Transform(msurgeries)
+
 		err = d.BulkInsert(surgeries, nperpage)
 		if err != nil {
 			log.Fatal(err)
 		}
 		i++
+	}
+	msurgeries, err := d.Paginate(i*nperpage, totaldoc - (nperpage*(i)))
+	if err != nil {
+		log.Fatal(err)
+	}
+	surgeries := transformer.Transform(msurgeries)
+	err = d.BulkInsert(surgeries, nperpage)
+	if err != nil {
+		log.Fatal(err)
 	}
 }

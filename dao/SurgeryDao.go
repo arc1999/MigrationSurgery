@@ -15,14 +15,14 @@ type SurgeryDao struct {
 }
 
 func (d SurgeryDao) Paginate(pagenumber int64, nperpage int64) ([]model.SurgeryMongo, error) {
-
+	log.Println(pagenumber,nperpage)
 	options := options.Find()
 	options.SetLimit(nperpage)
 	options.SetSort(bson.M{})
 	options.SetSkip(pagenumber)
 
 	db := db.GetMongoDB()
-	cur, err := db.Collection(os.Getenv("DATA_MONGODB_DATABASE")).Find(context.TODO(), bson.M{}, options)
+	cur, err := db.Collection(os.Getenv("DATA_MONGODB_COLLECTION")).Find(context.TODO(), bson.M{}, options)
 	if err != nil {
 		return nil, err
 	}
@@ -36,11 +36,12 @@ func (d SurgeryDao) Paginate(pagenumber int64, nperpage int64) ([]model.SurgeryM
 		}
 		jobs = append(jobs, job)
 	}
+	log.Println(len(jobs))
 	return jobs, nil
 }
 func (d SurgeryDao) GetCount() (int64, error) {
 	db := db.GetMongoDB()
-	return db.Collection(os.Getenv("DATA_MONGODB_DATABASE")).CountDocuments(context.TODO(), bson.M{})
+	return db.Collection(os.Getenv("DATA_MONGODB_COLLECTION")).CountDocuments(context.TODO(),bson.D{})
 }
 func (d SurgeryDao) BulkInsert(Entity []model.Surgery, nperpage int64) error {
 	sqldb := db.GetMysqlDB()
@@ -54,4 +55,5 @@ func (d SurgeryDao) BulkInsert(Entity []model.Surgery, nperpage int64) error {
 		return err
 	}
 	return nil
+
 }
